@@ -22,7 +22,7 @@ module hsvReduce(reset, clk,
    
    colorReduce hsvRed1(pix1RGB, clk, reset, tRGB1);
 
-   colorReduce hsvRed2(pix2RGB, clk, reset, tRGB1);
+   colorReduce hsvRed2(pix2RGB, clk, reset, tRGB2);
 
    // We really need to change proc_pixs every other clock cycle
    wire [35:0] 	 two_proc_pixs;

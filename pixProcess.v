@@ -12,6 +12,8 @@ module pixProc(reset, clk,
    input [18:0] write_addr; 
    output [35:0] two_proc_pixs;
    output [18:0] proc_pix_addr;
+
+   wire [35:0] 	 two_proc_pixs;
    
 
    // Removing THREE LSBs
@@ -20,7 +22,7 @@ module pixProc(reset, clk,
    parameter B_MASK = 6'b110000;
 
    // We want to clock our processing
-   reg [35:0] 	 two_proc_pixs;
+   //reg [35:0] 	 two_proc_pixs;
    reg [18:0] 	 proc_pix_addr;
 
    // Note actually delay is half of DELAY
