@@ -23,13 +23,18 @@ module pixProc(reset, clk,
    reg [35:0] 	 two_proc_pixs;
    reg [18:0] 	 proc_pix_addr;
 
-   parameter DELAY = 150;
+   // Note actually delay is half of DELAY
+   parameter DELAY = 80;
    parameter ADD_DEL = 19 * DELAY - 1;
    parameter DAT_DEL = 36 * DELAY - 1;
    
 
    reg [ADD_DEL:0] addr_del;
    reg [DAT_DEL:0] dat_del;
+
+   hsvReduce hsv_abstr(reset, clk, dat_del[DAT_DEL:DAT_DEL-35],
+		       two_proc_pixs);
+   
    
    
    // Simply RGB Thresholding
@@ -37,7 +42,8 @@ module pixProc(reset, clk,
      begin
 	dat_del <= {dat_del[DAT_DEL - 36:0], two_pixel_vals};
 	
-	two_proc_pixs <= dat_del[DAT_DEL:DAT_DEL-35] & {R_MASK, G_MASK, B_MASK,R_MASK, G_MASK, B_MASK};
+	//two_proc_pixs <= dat_del[DAT_DEL:DAT_DEL-35] & {R_MASK, G_MASK, B_MASK,R_MASK, G_MASK, B_MASK};
+	
 	// Let's see what happens if we delay write_addr by more than appropriate
 	addr_del <= {addr_del[ADD_DEL-19:0], write_addr};
 	proc_pix_addr <= addr_del[ADD_DEL:ADD_DEL-18];
